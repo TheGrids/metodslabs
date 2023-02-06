@@ -4,10 +4,9 @@ import { Landing } from './components/landing/Landing.jsx'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
+    <div>
       <Landing/>
     </div>
   )
