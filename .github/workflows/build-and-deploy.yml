@@ -36,7 +36,7 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: production-files
-        path: lab 1//dist
+        path: lab 1/dist
   
   deploy:
     name: Deploy
@@ -53,10 +53,10 @@ jobs:
       uses: actions/download-artifact@master
       with:
         name: production-files
-        path: lab 1//dist
+        path: lab 1/dist
 
     - name: Deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: lab 1//dist
+        publish_dir: lab 1/dist
