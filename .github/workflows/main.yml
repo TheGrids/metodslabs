@@ -13,6 +13,10 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     
+    defaults:
+      run:
+        working-directory: lab 1
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
