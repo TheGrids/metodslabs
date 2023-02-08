@@ -7,16 +7,56 @@ on:
   pull_request:
     branches:
       - main
-
+      
 jobs:
-  build-deploy:
+  build:
+    name: Build
     runs-on: ubuntu-latest
+    
     defaults:
       run:
         working-directory: lab 1
-      
+    
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Install Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16.x
+    
+    - name: Install NPM packages
+      run: npm ci
+    
+    - name: Build project
+      run: npm run build
 
-    - name: Deploy react app to github pages
-      uses: tanwanimohit/deploy-react-to-ghpages@v1.0.1
+    - name: Upload production-ready build files
+      uses: actions/upload-artifact@master
+      with:
+        name: production-files
+        path: lab 1/dist
+  
+  deploy:
+    name: Deploy
+    needs: build
+    if: success()
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: lab 1
+    
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@master
+      with:
+        name: production-files
+        path: lab 1/dist
+
+    - name: Deploy to gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: lab 1/dist
