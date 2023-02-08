@@ -4,7 +4,7 @@ import './Form.css'
 export const Form = () => {
 
     return (
-        <div className='fullscreen' style={{color: "black", fontSize: "20px"}}>
+        <div className='fullscreen' style={{fontSize: "20px"}}>
             <fieldset>
                 <legend style={{textAlign: "center"}}>
                     Давайте познакомимся?
